@@ -15,13 +15,9 @@ public class UserDaoImpl implements UserDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
     @Override
-    public List getAllUsers() {
-        Session session = this.sessionFactory.getCurrentSession();
+    public List<User> getAllUsers() {
+        Session session = sessionFactory.getCurrentSession();
         List<User> userList = session.createQuery("FROM User").list();
         return userList;
     }
@@ -40,5 +36,10 @@ public class UserDaoImpl implements UserDao {
         return user;
     }
 
-    //https://github.com/java2blog/Tutorials/blob/master/Spring%20Boot/SpringBootHibernateExample/src/main/java/org/arpit/java2blog/dao/CustomerDaoImpl.java
+    @Override
+    public Integer createUser(User user) {
+        Session session = sessionFactory.getCurrentSession();
+        session.save(user);
+        return user.getId();
+    }
 }

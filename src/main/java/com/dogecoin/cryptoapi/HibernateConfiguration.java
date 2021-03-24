@@ -17,9 +17,6 @@ public class HibernateConfiguration {
     @Value("${spring.datasource.driver-class-name}")
     private String DRIVER;
 
-    @Value("${spring.datasource.password}")
-    private String PASSWORD;
-
     @Value("${spring.datasource.url}")
     private String URL;
 
@@ -44,7 +41,6 @@ public class HibernateConfiguration {
         dataSource.setDriverClassName(DRIVER);
         dataSource.setUrl(URL);
         dataSource.setUsername(USERNAME);
-        dataSource.setPassword(PASSWORD);
         return dataSource;
     }
 

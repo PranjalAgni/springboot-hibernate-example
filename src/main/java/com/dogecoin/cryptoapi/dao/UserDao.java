@@ -8,4 +8,6 @@ public interface UserDao {
     public List<User> getAllUsers();
 
     public User getUserById(Integer userId);
+
+    public Integer createUser(User user);
 }
