@@ -2,6 +2,7 @@ package com.dogecoin.cryptoapi.controllers;
 
 import com.dogecoin.cryptoapi.models.User;
 import com.dogecoin.cryptoapi.services.UserService;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,12 +42,12 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public HashMap<String, Object> createUser(@RequestBody Map<String, Object> data) {
+    public HashMap<String, Object> createUser(@RequestBody JsonNode data) {
         logger.info("Inside createUser()");
         logger.info(data.toString());
-        String name = (String) data.get("name");
-        String email = (String) data.get("email");
-        String bio = (String) data.get("bio");
+        String name = data.get("name").toString();
+        String email = data.get("email").toString();
+        String bio = data.get("bio").toString();
         Integer id = userService.addUser(name, email, bio);
         HashMap<String, Object> map = new HashMap<>();
         map.put("status", "success");
