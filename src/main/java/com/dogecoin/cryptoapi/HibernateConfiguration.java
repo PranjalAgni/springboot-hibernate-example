@@ -65,3 +65,5 @@ public class HibernateConfiguration {
         return transactionManager;
     }
 }
+
+//https://github.com/java2blog/Tutorials/tree/master/Spring%20Boot/SpringBootHibernateExample
