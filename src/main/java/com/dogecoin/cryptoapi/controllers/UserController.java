@@ -50,9 +50,9 @@ public class UserController {
         logger.info("Inside createUser()");
         logger.info(data.toString());
         JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
-        String name = jsonObject.get("name").toString();
-        String email = jsonObject.get("email").toString();
-        String bio = jsonObject.get("bio").toString();
+        String name = jsonObject.get("name").getAsString();
+        String email = jsonObject.get("email").getAsString();
+        String bio = jsonObject.get("bio").getAsString();
         Integer id = userService.addUser(name, email, bio);
         HashMap<String, Object> map = new HashMap<>();
         map.put("status", "success");
