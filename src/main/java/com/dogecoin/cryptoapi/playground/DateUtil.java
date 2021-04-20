@@ -5,28 +5,32 @@ import java.util.Date;
 
 public class DateUtil {
     public static void main(String[] args) {
-        boolean result = isPast("2021-04-16 14:06:43");
+        Date old = new Date("2021-04-20 00:40:00");
+        Date timestamp = getFormattedTimestamp("2021-04-20 00:40:00");
+        boolean result = isPast(old);
         System.out.println("Result: "+ result);
 
     }
 
     public static Date getFormattedTimestamp(String timestamp) {
         Date formattedTimestamp = null;
+        if (timestamp == null) return formattedTimestamp;
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             formattedTimestamp = dateFormat.parse(timestamp);
+            Date currentTStamp = new Date();
         } catch (Exception ex) {
             System.out.println(ex);
         }
 
         return formattedTimestamp;
     }
-    public static boolean isPast(String timestamp) {
+
+    public static boolean isPast(Date timestamp) {
         try {
-            Date storedTStamp = getFormattedTimestamp(timestamp);
             Date currentTStamp = new Date();
             System.out.println("Current timestamp: " + currentTStamp);
-            if (storedTStamp.before(currentTStamp)) return true;
+            if (timestamp.before(currentTStamp)) return true;
         } catch(Exception ex) {
             System.out.println(ex);
         }
@@ -38,7 +42,7 @@ public class DateUtil {
         return new Date();
     }
 
-    /**
+/**
     public static String getAnalystStatus() {
         String accountId = "101";
         String userId = "42";
@@ -96,5 +100,5 @@ public class DateUtil {
 
         return "SUCCESS";
     }
-     **/
+**/
 }

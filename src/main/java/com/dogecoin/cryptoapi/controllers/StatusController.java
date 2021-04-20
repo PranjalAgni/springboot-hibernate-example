@@ -27,6 +27,7 @@ public class StatusController {
         logger.info("Inside createStatus()");
         JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
         String statusName = jsonObject.get("name").getAsString();
+        // validation
         Integer statusId = statusService.addStatus(statusName, 1);
         HashMap<String,Object> map = new HashMap<>();
         map.put("statusId", statusId);
