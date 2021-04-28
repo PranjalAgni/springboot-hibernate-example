@@ -1,6 +1,7 @@
 package com.dogecoin.cryptoapi.controllers;
 
 import com.dogecoin.cryptoapi.models.User;
+import com.dogecoin.cryptoapi.playground.DateUtil;
 import com.dogecoin.cryptoapi.services.UserService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -10,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,10 +31,21 @@ public class UserController {
         logger.info("Here inside getUsers");
         HashMap<String,Object> map = new HashMap<>();
         List<User> userList = userService.getUsers();
+        List<HashMap<String, Object>> trimmedUserList = new ArrayList<>();
+
+        for (User user: userList) {
+            HashMap<String, Object> userMap = new HashMap<>();
+            userMap.put("id", user.getId());
+            userMap.put("name", user.getName());
+            userMap.put("date", DateUtil.formatDateToSQLTimestamp(new Date()));
+            trimmedUserList.add(userMap);
+        }
+
+
         Gson gson = new Gson();
 
         map.put("count", userList.size());
-        map.put("users", userList);
+        map.put("users", trimmedUserList);
         return gson.toJson(map);
     }
 

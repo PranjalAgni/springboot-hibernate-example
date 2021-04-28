@@ -27,6 +27,12 @@ public class StatusController {
         logger.info("Inside createStatus()");
         JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
         String statusName = jsonObject.get("name").getAsString();
+        String expiryTime = null;
+
+        if (!jsonObject.get("expiryTime").isJsonNull()) {
+            expiryTime = jsonObject.get("expiryTime").getAsString();
+        }
+        logger.info(expiryTime);
         // validation
         Integer statusId = statusService.addStatus(statusName, 1);
         HashMap<String,Object> map = new HashMap<>();

@@ -1,15 +1,32 @@
 package com.dogecoin.cryptoapi.playground;
 
+import org.dom4j.util.StringUtils;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateUtil {
     public static void main(String[] args) {
-        Date old = new Date("2021-04-20 00:40:00");
+        Date val = new Date();
+        formatDateToSQLTimestamp(new Date());
         Date timestamp = getFormattedTimestamp("2021-04-20 00:40:00");
-        boolean result = isPast(old);
+        boolean result = isPast(timestamp);
         System.out.println("Result: "+ result);
 
+    }
+
+    public static String formatDateToSQLTimestamp(Date date) {
+        String formattedTimestamp = null;
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            formattedTimestamp = dateFormat.format(date);
+            System.out.println(formattedTimestamp);
+
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+
+        return formattedTimestamp;
     }
 
     public static Date getFormattedTimestamp(String timestamp) {
